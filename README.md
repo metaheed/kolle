@@ -1,10 +1,21 @@
-# kolle (La Colle)
+# kolle
 Zero code based metadata driven data pipeline automation
 
-- Programming with declarative turtle
-- Realtime collaboration
-- Handling schema change
-- Define domain type
+# Features
+- Metadata harvesting
+- Data(XML, JSON, CSV, ZIP ) to schema generator
+- Schema to schema transformation
+- Data quality based on data catalog
+- Custom domain type
+- Handling schema change automatically
+- Real time code generation (KSQL, Kafka topic, kafka connector, Avro schema)
+- Real time collaboration within multiple user
+- Incremental deployment
+- Batch cleanup (only process or only storage or both process and storage)
+- View data in nice UI
+- Download data in many different format like xml, rdf, json, and csv
+- Integration with any (cloud, on promise) confluent platform
+- Many pattern - dead latter queue, distinct, data-vault model converter and more
 
 # Install
 - Try online
@@ -16,6 +27,11 @@ Zero code based metadata driven data pipeline automation
 $ docker pull ghcr.io/metaheed/kolle
 $ docker run -it -p 3000:3000 --rm ghcr.io/metaheed/kolle
 ```
+
+# Next Features
+- Data profiling
+- Test data quality at any point
+- Data generator
 
 
 ## License
