@@ -35,7 +35,7 @@ $ docker run -it -p 3000:3000 --rm ghcr.io/metaheed/kolle
 
 
 # Example 
-[![Distinct Example](https://www.youtube.com/watch?v=a7qhi7gLFI8/0.jpg)](https://www.youtube.com/watch?v=a7qhi7gLFI8 "Kolle Distinct Example")
+[![Distinct Example](https://img.youtube.com/vi/a7qhi7gLFI8/0.jpg)](https://www.youtube.com/watch?v=a7qhi7gLFI8 "Kolle Distinct Example")
 
 
 
