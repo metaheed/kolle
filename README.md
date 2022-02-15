@@ -39,7 +39,7 @@ $ docker run -it -p 3000:3000 --rm ghcr.io/metaheed/kolle
 
 
 ## Triple to ksql reactive code generator and visualization 
-[![Distinct Example](https://img.youtube.com/vi/XD-yRu6babw/0.jpg)](https://www.youtube.com/watch?v=XD-yRu6babw "Reactive code generator")
+[![code generator](https://img.youtube.com/vi/XD-yRu6babw/0.jpg)](https://www.youtube.com/watch?v=XD-yRu6babw "Reactive code generator")
 
 
 ## Remove duplicate row from csv file
@@ -49,7 +49,7 @@ $ docker run -it -p 3000:3000 --rm ghcr.io/metaheed/kolle
 
 
 ## Data vault example
-[![Distinct Example](https://img.youtube.com/vi/UX1qGB8jcU4/0.jpg)](https://www.youtube.com/watch?v=UX1qGB8jcU4 "Data vault Example")
+[![Data vault](https://img.youtube.com/vi/UX1qGB8jcU4/0.jpg)](https://www.youtube.com/watch?v=UX1qGB8jcU4 "Data vault Example")
 
 
 
