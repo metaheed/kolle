@@ -38,6 +38,8 @@ $ docker run -it -p 3000:3000 --rm ghcr.io/metaheed/kolle
 
 
 
+[![Introduction](https://img.youtube.com/vi/tH62kZcYEEo/0.jpg)](https://www.youtube.com/watch?v=tH62kZcYEEo "About Kolle")
+
 ## Triple to ksql reactive code generator and visualization 
 [![code generator](https://img.youtube.com/vi/XD-yRu6babw/0.jpg)](https://www.youtube.com/watch?v=XD-yRu6babw "Reactive code generator")
 
