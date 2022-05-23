@@ -1,5 +1,7 @@
 # kolle
-Zero code based metadata driven data pipeline automation
+Low/Zero code based metadata driven data pipeline automation
+
+# Why
 
 # Features
 - Metadata harvesting
