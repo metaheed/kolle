@@ -1,7 +1,8 @@
 # kolle
-Low/Zero code based metadata driven data pipeline automation
+Zero/Low code based metadata driven data pipeline automation
 
-# Why
+# Architecture
+![Alt text](doc/kolle_blueprint.png?raw=true "Title")
 
 # Features
 - Metadata harvesting
@@ -62,6 +63,3 @@ $ docker run -it -p 3000:3000 --rm ghcr.io/metaheed/kolle
 Copyright © 2022-2023 Abdullah Mamun
 
 Distributed under the EPL License. See LICENSE.
-
-This project contains code from:
-- Clojure, which is licensed under the same EPL License.
