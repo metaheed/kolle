@@ -1,0 +1,10 @@
+
+git checkout main
+git tag $release_version HEAD
+git push origin --tags
+- After tag push, it will start github action to release new version.
+
+
+
+sudo docker pull ghcr.io/metaheed/kolle
+sudo docker run -it -p 3000:3000 --rm ghcr.io/metaheed/kolle

@@ -1,0 +1,111 @@
+name: build and release container
+
+on:
+  push:
+    # branches:
+    #  - main
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+
+jobs:
+  test:
+    name: build test and release
+    runs-on: ubuntu-20.04
+    container:
+      # Source: https://github.com/day8/dockerfiles-for-dev-ci-images
+      image: ghcr.io/day8/chrome-56:2
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    strategy:
+      matrix:
+        java: [ '11' ]
+
+    steps:
+      - name: Check out main repo
+        uses: actions/checkout@v2
+
+      - name: Checkout impl repo
+        uses: actions/checkout@v2
+        with:
+          repository: metaheed/metarx.io
+          token: ${{ secrets.GH_PAT }} # `GH_PAT` is a secret that contains your PAT
+          path: kolle
+
+      - name: Maven cache
+        id: maven-cache
+        uses: actions/cache@v2
+        with:
+          path: /root/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/shadow-cljs.edn', '.github/workflows/**') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: npm cache
+        uses: actions/cache@v2
+        with:
+          path: /root/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('kolle-http-frontend/shadow-cljs.edn') }}-${{ hashFiles('**/deps.cljs') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: npx package Module cache
+        id: npx-module-cache
+        uses: actions/cache@v2
+        with:
+          path: kolle/kolle-http-frontend/node_modules
+          key: ${{ runner.os }}-maven-${{ hashFiles('kolle/kolle-http-frontend/package.json', '.github/workflows/**') }}
+          restore-keys: |
+            ${{ runner.os }}-module-
+
+      - name: shadow-cljs compiler cache
+        uses: actions/cache@v2
+        with:
+          path: kolle/kolle-http-frontend/.shadow-cljs
+          key: ${{ runner.os }}-shadow-cljs-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-shadow-cljs-
+
+      - if: steps.npx-module-cache.outputs.cache-hit != 'true'
+        working-directory: kolle/kolle-http-frontend
+        run: |
+          npm i
+
+      - name: shadow-cljs build prod
+        working-directory: kolle/kolle-http-frontend
+        run: |
+          npm i
+          npx shadow-cljs release prod
+
+      - name: Build clj artifact
+        working-directory: kolle
+        run: |
+          clojure -X:build app-deploy
+
+      - name: Get the tag version
+        id: get_version
+        shell: bash
+        run: echo "##[set-output name=VERSION;]$(echo ${GITHUB_REF#refs/tags/})"
+
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: metaheed/kolle
+          workdir: kolle/build/container
+          tags: "latest,${{ steps.get_version.outputs.VERSION }}"
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GH_PAT }}
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.get_version.outputs.VERSION }}
+          release_name: Release ${{ steps.get_version.outputs.VERSION }}
+          body: |
+            [Changelog](https://github.com/metaheed/kolle.io)
+          draft: false
+          prerelease: false
