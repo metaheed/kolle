@@ -45,7 +45,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: /root/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('kolle-http-frontend/shadow-cljs.edn') }}-${{ hashFiles('**/deps.cljs') }}
+          key: ${{ runner.os }}-npm-${{ hashFiles('webapp/shadow-cljs.edn') }}-${{ hashFiles('**/deps.cljs') }}
           restore-keys: |
             ${{ runner.os }}-npm-
 
@@ -53,26 +53,26 @@ jobs:
         id: npx-module-cache
         uses: actions/cache@v2
         with:
-          path: kolle/kolle-http-frontend/node_modules
-          key: ${{ runner.os }}-maven-${{ hashFiles('kolle/kolle-http-frontend/package.json', '.github/workflows/**') }}
+          path: kolle/webapp/node_modules
+          key: ${{ runner.os }}-maven-${{ hashFiles('kolle/webapp/package.json', '.github/workflows/**') }}
           restore-keys: |
             ${{ runner.os }}-module-
 
       - name: shadow-cljs compiler cache
         uses: actions/cache@v2
         with:
-          path: kolle/kolle-http-frontend/.shadow-cljs
+          path: kolle/webapp/.shadow-cljs
           key: ${{ runner.os }}-shadow-cljs-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-shadow-cljs-
 
       - if: steps.npx-module-cache.outputs.cache-hit != 'true'
-        working-directory: kolle/kolle-http-frontend
+        working-directory: kolle/webapp
         run: |
           npm i
 
       - name: shadow-cljs build prod
-        working-directory: kolle/kolle-http-frontend
+        working-directory: kolle/webapp
         run: |
           npm i
           npx shadow-cljs release prod
