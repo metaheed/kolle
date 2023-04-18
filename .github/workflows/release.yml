@@ -69,12 +69,12 @@ jobs:
       - if: steps.npx-module-cache.outputs.cache-hit != 'true'
         working-directory: kolle/webapp
         run: |
-          npm i
+          npm i --force
 
       - name: shadow-cljs build prod
         working-directory: kolle/webapp
         run: |
-          npm i
+          npm i --force
           npx shadow-cljs release prod
 
       - name: Build clj artifact
