@@ -8,8 +8,8 @@ on:
       - "v[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
-  test:
-    name: build test and release
+  test-app:
+    name: test app
     runs-on: ubuntu-20.04
     container:
       image: ghcr.io/metaheed/kolle-ci:v0.0.2
@@ -77,6 +77,35 @@ jobs:
           npm i --force
           npx shadow-cljs release prod
 
+  release-app:
+    name: Build docker and release package
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [ '11' ]
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+
+      - name: Maven cache
+        id: maven-cache
+        uses: actions/cache@v2
+        with:
+          path: /root/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/deps.edn') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java }}
+
+      - name: Setup Clojure
+        uses: DeLaGuardo/setup-clojure@master
+        with:
+          tools-deps: '1.10.3.1029'
+
       - name: Build clj artifact
         working-directory: kolle
         run: |
@@ -110,5 +139,8 @@ jobs:
           release_name: Release ${{ steps.get_version.outputs.VERSION }}
           body: |
             [Changelog](https://github.com/metaheed/kolle.io)
-          draft: false
-          prerelease: false
+            draft: false
+            prerelease: false
+
+
+
