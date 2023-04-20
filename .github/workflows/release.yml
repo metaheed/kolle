@@ -117,7 +117,7 @@ jobs:
         uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: metaheed/kolle
-          workdir: kolle/build/container
+          workdir: kolle/kolle/build/container
           tags: "latest,${{ steps.get_version.outputs.VERSION }}"
           registry: ghcr.io
           username: ${{ github.repository_owner }}
