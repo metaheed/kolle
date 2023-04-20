@@ -8,8 +8,9 @@ on:
       - "v[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
-  test-app:
+  compile:
     name: test app
+
     runs-on: ubuntu-20.04
     container:
       image: ghcr.io/metaheed/kolle-ci:v0.0.2
@@ -77,8 +78,20 @@ jobs:
           npm i --force
           npx shadow-cljs release prod
 
-  release-app:
+      - name: Build clj artifact
+        working-directory: kolle
+        run: |
+          clojure -T:build package
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dcontainer
+          path: kolle/build/container
+
+
+  package:
     name: Build docker and release package
+    needs: compile
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -87,36 +100,10 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v2
 
-      - name: Checkout impl repo
-        uses: actions/checkout@v2
+      - name: Down load artificat
+        uses: actions/download-artifact@v3
         with:
-          repository: metaheed/metarx.io
-          token: ${{ secrets.GH_PAT }} # `GH_PAT` is a secret that contains your PAT. need to generate this key from github personal setting
-          path: kolle
-
-      - name: Maven cache
-        id: maven-cache
-        uses: actions/cache@v2
-        with:
-          path: /root/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/deps.edn') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-
-      - name: Setup Java
-        uses: actions/setup-java@v1
-        with:
-          java-version: ${{ matrix.java }}
-
-      - name: Setup Clojure
-        uses: DeLaGuardo/setup-clojure@master
-        with:
-          tools-deps: '1.10.3.1029'
-
-      - name: Build clj artifact
-        working-directory: kolle
-        run: |
-          clojure -T:build app-deploy
+          name: dcontainer
 
       - name: Get the tag version
         id: get_version

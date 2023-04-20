@@ -6,14 +6,14 @@
 #git checkout -b dev
 #git push --set-upstream origin dev
 
-release_version="v0.0.039"
+release_version="v0.0.040"
 
 #release_version="v$(date +'%Y.%m.%d.%H%M%S')"
 
 echo "##############check out development ######################"
 
 git checkout development
-git commit -m "Release new version 0.0.039" -a
+git commit -m "Release new version 0.0.040" -a
 git merge main
 git push
 
