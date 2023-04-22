@@ -2,10 +2,10 @@ name: build and release container
 
 on:
   push:
-    # branches:
-    #  - main
-    tags:
-      - "v[0-9]+.[0-9]+.[0-9]+"
+     branches:
+      - development
+   # tags:
+    #  - "v[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
   compile:
@@ -78,15 +78,10 @@ jobs:
           npm i --force
           npx shadow-cljs release prod
 
-      - name: Build clj artifact
-        working-directory: kolle
-        run: |
-          clojure -T:build package
-
       - uses: actions/upload-artifact@v3
         with:
-          name: dcontainer
-          path: kolle/build/container
+          name: kollejs
+          path: kolle/resources/js/main.js
 
 
   package:
@@ -100,41 +95,75 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v2
 
+      - name: Checkout impl repo
+        uses: actions/checkout@v2
+        with:
+          repository: metaheed/metarx.io
+          token: ${{ secrets.GH_PAT }} # `GH_PAT` is a secret that contains your PAT. need to generate this key from github personal setting
+          path: kolle
+
       - name: Down load artificat
         uses: actions/download-artifact@v3
         with:
-          name: dcontainer
+          name: kollejs
 
-      - name: Get the tag version
-        id: get_version
-        shell: bash
-        run: echo "##[set-output name=VERSION;]$(echo ${GITHUB_REF#refs/tags/})"
+      - name: Copy file
+        run: |
+          cp main.js kolle/resources/js/
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      - run: echo `cat kolle/resources/js/main.txt`
 
-      - name: Publish to Registry
-        uses: elgohr/Publish-Docker-Github-Action@v5
-        with:
-          name: metaheed/kolle
-          workdir: kolle/kolle/build/container
-          tags: "latest,${{ steps.get_version.outputs.VERSION }}"
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GH_PAT }}
-          platforms: linux/amd64,linux/arm64
+    #  - name: Maven cache
+    #    id: maven-cache
+    #    uses: actions/cache@v2
+    #    with:
+    #      path: /root/.m2/repository
+    #      key: ${{ runner.os }}-maven-${{ hashFiles('**/deps.edn') }}
+    #      restore-keys: |
+    #        ${{ runner.os }}-maven-
 
-      - name: Create GitHub Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.get_version.outputs.VERSION }}
-          release_name: Release ${{ steps.get_version.outputs.VERSION }}
-          body: |
-            [Changelog](https://github.com/metaheed/kolle.io)
-            draft: false
-            prerelease: false
+    #  - name: Setup Java
+    #    uses: actions/setup-java@v1
+    #    with:
+    #      java-version: ${{ matrix.java }}
 
+    #  - name: Setup Clojure
+    #    uses: DeLaGuardo/setup-clojure@master
+    #    with:
+    #      tools-deps: '1.10.3.1029'
 
+    #  - name: Build clj artifact
+    #      working-directory: kolle
+    #      run: |
+    #        clojure -T:build package
 
+    #  - name: Get the tag version
+    #      id: get_version
+    #      shell: bash
+    #      run: echo "##[set-output name=VERSION;]$(echo ${GITHUB_REF#refs/tags/})"
+
+    #  - name: Set up Docker Buildx
+    #      uses: docker/setup-buildx-action@v2
+
+    #  - name: Publish to Registry
+    #      uses: elgohr/Publish-Docker-Github-Action@v5
+    #      with:
+    #        name: metaheed/kolle
+    #        workdir: kolle/kolle/build/container
+    #        tags: "latest,${{ steps.get_version.outputs.VERSION }}"
+    #        registry: ghcr.io
+    #        username: ${{ github.repository_owner }}
+    #        password: ${{ secrets.GH_PAT }}
+    #        platforms: linux/amd64,linux/arm64
+
+    #  - name: Create GitHub Release
+    #      uses: actions/create-release@v1
+    #      env:
+    #        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #      with:
+    #        tag_name: ${{ steps.get_version.outputs.VERSION }}
+    #        release_name: Release ${{ steps.get_version.outputs.VERSION }}
+    #        body: |
+    #          [Changelog](https://github.com/metaheed/kolle.io)
+    #          draft: false
+    #          prerelease: false
