@@ -2,9 +2,9 @@ name: build and release container
 
 on:
   push:
-     branches:
+    branches:
       - development
-   # tags:
+    # tags:
     #  - "v[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
@@ -81,7 +81,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: kollejs
-          path: kolle/resources/js/main.js
+          path: kolle/resources/public/js/main.js
 
 
   package:
@@ -109,9 +109,9 @@ jobs:
 
       - name: Copy file
         run: |
-          cp main.js kolle/resources/js/
+          cp main.js kolle/resources/public/js/
 
-      - run: echo `cat kolle/resources/js/main.txt`
+      - run: echo `cat kolle/resources/public/js/main.js`
 
     #  - name: Maven cache
     #    id: maven-cache
