@@ -114,48 +114,48 @@ jobs:
 
       - run: echo `cat kolle/resources/public/js/main.js`
 
-    #  - name: Maven cache
-    #    id: maven-cache
-    #    uses: actions/cache@v2
-    #    with:
-    #      path: /root/.m2/repository
-    #      key: ${{ runner.os }}-maven-${{ hashFiles('**/deps.edn') }}
-    #      restore-keys: |
-    #        ${{ runner.os }}-maven-
+      - name: Maven cache
+        id: maven-cache
+        uses: actions/cache@v2
+        with:
+          path: /root/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/deps.edn') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
 
-    #  - name: Setup Java
-    #    uses: actions/setup-java@v1
-    #    with:
-    #      java-version: ${{ matrix.java }}
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java }}
 
-    #  - name: Setup Clojure
-    #    uses: DeLaGuardo/setup-clojure@master
-    #    with:
-    #      tools-deps: '1.10.3.1029'
+      - name: Setup Clojure
+        uses: DeLaGuardo/setup-clojure@master
+        with:
+          tools-deps: '1.10.3.1029'
 
-    #  - name: Build clj artifact
-    #      working-directory: kolle
-    #      run: |
-    #        clojure -T:build package
+      - name: Build clj artifact
+          working-directory: kolle
+          run: |
+            clojure -T:build package
 
-    #  - name: Get the tag version
-    #      id: get_version
-    #      shell: bash
-    #      run: echo "##[set-output name=VERSION;]$(echo ${GITHUB_REF#refs/tags/})"
+      - name: Get the tag version
+          id: get_version
+          shell: bash
+          run: echo "##[set-output name=VERSION;]$(echo ${GITHUB_REF#refs/tags/})"
 
-    #  - name: Set up Docker Buildx
-    #      uses: docker/setup-buildx-action@v2
+      - name: Set up Docker Buildx
+          uses: docker/setup-buildx-action@v2
 
-    #  - name: Publish to Registry
-    #      uses: elgohr/Publish-Docker-Github-Action@v5
-    #      with:
-    #        name: metaheed/kolle
-    #        workdir: kolle/kolle/build/container
-    #        tags: "latest,${{ steps.get_version.outputs.VERSION }}"
-    #        registry: ghcr.io
-    #        username: ${{ github.repository_owner }}
-    #        password: ${{ secrets.GH_PAT }}
-    #        platforms: linux/amd64,linux/arm64
+      - name: Publish to Registry
+          uses: elgohr/Publish-Docker-Github-Action@v5
+          with:
+            name: metaheed/kolle
+            workdir: kolle/kolle/build/container
+            tags: "latest,${{ steps.get_version.outputs.VERSION }}"
+            registry: ghcr.io
+            username: ${{ github.repository_owner }}
+            password: ${{ secrets.GH_PAT }}
+            platforms: linux/amd64,linux/arm64
 
     #  - name: Create GitHub Release
     #      uses: actions/create-release@v1
