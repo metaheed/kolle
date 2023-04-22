@@ -2,14 +2,14 @@ name: build and release container
 
 on:
   push:
-    branches:
-      - development
-    # tags:
-    #  - "v[0-9]+.[0-9]+.[0-9]+"
+    # branches:
+    #  - development
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
   compile:
-    name: test app
+    name: compile web
 
     runs-on: ubuntu-20.04
     container:
@@ -155,14 +155,14 @@ jobs:
           password: ${{ secrets.GH_PAT }}
           platforms: linux/amd64,linux/arm64
 
-    #  - name: Create GitHub Release
-    #      uses: actions/create-release@v1
-    #      env:
-    #        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #      with:
-    #        tag_name: ${{ steps.get_version.outputs.VERSION }}
-    #        release_name: Release ${{ steps.get_version.outputs.VERSION }}
-    #        body: |
-    #          [Changelog](https://github.com/metaheed/kolle.io)
-    #          draft: false
-    #          prerelease: false
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.get_version.outputs.VERSION }}
+          release_name: Release ${{ steps.get_version.outputs.VERSION }}
+          body: |
+            [Changelog](https://github.com/metaheed/kolle.io)
+             draft: false
+             prerelease: false
