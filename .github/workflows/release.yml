@@ -112,8 +112,6 @@ jobs:
           mkdir -p kolle/resources/public/js/
           cp main.js kolle/resources/public/js/
 
-      - run: echo `cat kolle/resources/public/js/main.js`
-
       - name: Maven cache
         id: maven-cache
         uses: actions/cache@v2
@@ -134,28 +132,28 @@ jobs:
           tools-deps: '1.10.3.1029'
 
       - name: Build clj artifact
-          working-directory: kolle
-          run: |
-            clojure -T:build package
+        working-directory: kolle
+        run: |
+          clojure -T:build package
 
       - name: Get the tag version
-          id: get_version
-          shell: bash
-          run: echo "##[set-output name=VERSION;]$(echo ${GITHUB_REF#refs/tags/})"
+        id: get_version
+        shell: bash
+        run: echo "##[set-output name=VERSION;]$(echo ${GITHUB_REF#refs/tags/})"
 
       - name: Set up Docker Buildx
-          uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v2
 
       - name: Publish to Registry
-          uses: elgohr/Publish-Docker-Github-Action@v5
-          with:
-            name: metaheed/kolle
-            workdir: kolle/kolle/build/container
-            tags: "latest,${{ steps.get_version.outputs.VERSION }}"
-            registry: ghcr.io
-            username: ${{ github.repository_owner }}
-            password: ${{ secrets.GH_PAT }}
-            platforms: linux/amd64,linux/arm64
+        uses: elgohr/Publish-Docker-Github-Action@v5
+        with:
+          name: metaheed/kolle
+          workdir: kolle/kolle/build/container
+          tags: "latest,${{ steps.get_version.outputs.VERSION }}"
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GH_PAT }}
+          platforms: linux/amd64,linux/arm64
 
     #  - name: Create GitHub Release
     #      uses: actions/create-release@v1
