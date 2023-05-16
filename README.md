@@ -41,12 +41,6 @@ $ docker pull ghcr.io/metaheed/kolle
 $ docker run -it -p 3000:3000 --rm ghcr.io/metaheed/kolle
 ```
 
-# Next Features
-- Data profiling
-- Test data quality at any point
-- Data generator
-
-
 
 ## License
 
