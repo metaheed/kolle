@@ -52,4 +52,4 @@ $ docker run -it -p 3000:3000 --rm ghcr.io/metaheed/kolle
 
 Copyright © 2022-2023 Abdullah Mamun
 
-Distributed under the MIT License. See LICENSE.
+Distributed under the Apache License. See LICENSE.
