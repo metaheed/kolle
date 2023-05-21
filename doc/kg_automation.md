@@ -10,7 +10,7 @@ Source data: [Datasets](https://github.com/databricks-industry-solutions/dlt-ins
 
 #### High level
 
-Document model -> data contract -> Knowledge graph model
+Document model -> Flatten model -> data contract -> Knowledge graph model
 
 Producer: Document model
 

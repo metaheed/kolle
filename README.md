@@ -8,7 +8,7 @@ Kolle is for working on data models, data-contract, data quality, data profiling
 
 Today for business continuation, the business model needs to represent in many ways normalized form for transactional data, a time-series database for process mining, a knowledge graph for semantics search or link data, a data-vault or snowflake model for data warehouse, a streaming model for the real-time event and columnar storage for machine learning. To move or prepare the data and model for multiple types of consumption is not only expensive but has a lot of repetition costs for the team and technology setup. Automation needs to be in place to reduce repetition costs.
 
-There are many ways to start automation of data processing or data ingestion. Some starts with infrastructure or tooling or starts writing code immediately. But Kolle uses a data modeling approach and data modeling is the first class citizen to this automation process.
+There are many ways to start automation of data processing or data ingestion. Some starts with infrastructure or tooling or starts writing code immediately. But Kolle uses data model and data modeling is the first class citizen to this automation process.
 
 Kolle enables users to work on data models, data contracts, metadata, data quality, and data lineage. Users will spend 90% of their time focusing on business work instead of spending time on different sets of tooling. End to end data integration will be generated based on data model and data contract.
 
@@ -22,8 +22,9 @@ End to end data integration from semi structure mangodb dataset to different typ
 
 # Features
 
-- Metadata harvesting
-- Data(XML, JSON, CSV, ZIP ) to model generator
+- Metadata harvesting from any source format
+- Share model within an organization or internet
+- Data(XML, JSON, CSV, ZIP) to model generator
 - Model to model transformation
 - Data quality based on micro type
 - Custom micro type
@@ -42,14 +43,26 @@ End to end data integration from semi structure mangodb dataset to different typ
 
 ![Alt text](doc/images/kolle_blueprint.png?raw=true "Title")
 
-# Example
+* **Source model**: Target system model, only technical transformation will be happened from refined to target model i.e graph, data-vault, etc. The target model can be optional if it is the same as the refined model.
+* **Raw model**: Input model for a data contract. Only technical transformation will happen from the source model to the raw model conversation i.e flatten, distinct, etc. The raw model can be optional if it is the same as the source model. Source and raw model values will be the same.
+* **Data contract**: Explicit task between producer and consumer.
+* **Refined model**: Output model of data contract. It is a type-based model. All attributes must have the proper type based on data contract consumer specifications.
+* **Target model**: Target system model, only technical transformation will be happened from refined to target model i.e graph, data-vault, etc. The target model can be optional if it is the same as the refined model.
+* **Microtype**: It is domain type - like email, claim_amount, customer_name, etc. Microtype will be driven from core type systems like string, int, float, etc.
+* **Macro**: Model to model transformation. It is a plug-in to the system and it removes repetition tasks.
+* **System config**: It contains different runtime configurations for the platform like partition, replication, window time, runtime service url, etc.
+* Metadata repo**: Main repo to contain user, metadata, system config, micro type or everything. It is unique with in the whole system. Every user can have multiple repositories.
+* **User**: Users can be either owners or have read-only permission to each repository. The owner can set different types of permission for the repo.
+* **Builder**: Glue different concepts that can be changed independently to create execution code for the platform.
 
-* [End-to-end pipeline from document model to knowledge graph model](doc/kg_automation.md)
+# Automation in action
+
+* [Convert document model to knowledge graph model](doc/kg_automation.md)
 * [Convert relational model to data vault model](doc/data_vault_automation.md)
 * [Data contract versioning](doc/data_contract_versioning.md)
 * [Data profiling before and after data contract](doc/data_profiling.md)
-* [Process XML data and donload as knowledge graph](doc/xml-knowledge-graph.md)
-* [Data pipeline versioning](doc/pipeline_version.md)
+* [Ingest and process XML data and download as knowledge graph or flatten model](doc/xml-knowledge-graph.md)
+* [Automation pipeline versioning](doc/pipeline_version.md)
 
 # Quick start
 
