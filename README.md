@@ -43,8 +43,8 @@ End to end data integration from semi structure mangodb dataset to different typ
 
 ![Alt text](doc/images/kolle_blueprint.png?raw=true "Title")
 
-* **Source model**: One to one copy from any source system, it can be any format like - csv, xml, json etc. It is private model, no one should access this model and source system is the owner of this model
-* **Raw model**: Input model for a data contract. Only technical transformation will happen from the source model to the raw model conversation i.e flatten, distinct, etc. The raw model can be optional if it is the same as the source model. Source and raw model values will be the same. It is also private model same as source model. Raw model should be access only from data contract process.
+* **Source model**: One to one copy from any source system, it can be any format like - csv, xml, json etc.Target system model, only technical transformation will be happened from refined to target model i.e graph, data-vault, etc. The target model can be optional if it is the same as the refined model. It is private model, no one should access this model and source system is the owner of this model
+* **Raw model**: Input model for a data contract. Only technical transformation will happen from the source model to the raw model conversation i.e flatten, distinct, etc. The raw model can be optional if it is the same as the source model. Source and raw model values will be the same. It is also private model same as source model. Raw model should be access only from data contract.
 * **Data contract**: Explicit task between producer and consumer.
 * **Refined model**: Output model of data contract. It is a type-based model. All attributes must have the proper type based on data contract consumer specifications. Permission based on consumer specification.
 * **Target model**: Target system model, only technical transformation will be happened from refined to target model i.e graph, data-vault, etc. The target model can be optional if it is the same as the refined model.

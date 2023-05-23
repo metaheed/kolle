@@ -1,4 +1,4 @@
-# End-to-end pipeline from document model to knowledge graph model
+# End-to-end pipeline from flatten model to knowledge graph model
 
 As a part of this tutorial, we will see how to transfer the document model to the knowledge graph model using Kolle without writing any single line of code.
 
@@ -10,32 +10,33 @@ Source data: [Datasets](https://github.com/databricks-industry-solutions/dlt-ins
 
 #### High level
 
-Document model -> Flatten model -> data contract -> Knowledge graph model
+Flatten model -> data contract -> Knowledge graph model
 
-Producer: Document model
+Producer: Flatten model
 
 Consumer: Knowledge graph model
 
 ### Processing step
 
-1. Importing source models from claim datasets
-2. Applying flattening to build a flattened model from a semi-structure source data
-3. Remove duplicate data from flattened data
-4. Data profiling on the flattened raw data
-5. Apply data contract for data quality i.e selection, typecast, enrichment, reference data integration, etc
+1. Importing source models from policy datasets
+2. Remove duplicate data from source data
+3. Data profiling on the source data
+4. Apply data contract for data quality i.e selection, typecast, enrichment, reference data integration, etc
 
    5a. Good data will move to refined model
 
    5b. Bad data will move to refined error model
-6. Data profiling on refined data
-7. Convert to the RDF model from refined model as the target model
-8. Visualize data as knowledge graph
+5. Data profiling on refined data
+6. Convert to the RDF model from refined model as the target model
+7. Visualize data as knowledge graph
 
 ### Technical setup
 
-1. MongoDB as a source for document data
+1. Postgres as a source
 2. Kafka for event streaming to ingest and process data in real-time
 3. Stardog as a target for knowledge graph
 4. Kolle for metabase repository and automation
 
 ### Show me
+
+[![Introduction](https://img.youtube.com/vi/VEIWuMkZzaI/0.jpg)](https://youtu.be/VEIWuMkZzaI)
