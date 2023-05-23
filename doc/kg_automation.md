@@ -32,7 +32,7 @@ Consumer: Knowledge graph model
 
 ### Technical setup
 
-1. Postgres as a source
+1. CSV file as a source
 2. Kafka for event streaming to ingest and process data in real-time
 3. Stardog as a target for knowledge graph
 4. Kolle for metabase repository and automation
