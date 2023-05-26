@@ -57,8 +57,8 @@ End to end data integration from semi structure mangodb dataset to different typ
 
 # Automation in action
 
-* [Convert document model to knowledge graph model](doc/kg_automation.md)
-* [Convert relational model to data vault model](doc/data_vault_automation.md)
+* [Convert flatten model to knowledge graph model](doc/kg_automation.md)
+* [Convert document model to data vault model](doc/data_vault_automation.md)
 * [Data contract versioning](doc/data_contract_versioning.md)
 * [Data profiling before and after data contract](doc/data_profiling.md)
 * [Ingest and process XML data and download as knowledge graph or flatten model](doc/xml-knowledge-graph.md)

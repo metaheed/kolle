@@ -1,4 +1,4 @@
-### Convert relational model to data warehouse data vault model
+### Convert document model to data warehouse data vault model
 
 As a part of this tutorial, we will see how to transfer the relational model to the data vault model using Kolle without writing any single line of code.
 
@@ -14,23 +14,26 @@ Relational model -> data contract -> Data vault model
 
 ### Processing step
 
-1. Importing source models from policy datasets
-2. Remove duplicate data from sources data
-3. Data profiling on the raw data
-4. Apply data contract for data quality i.e selection, typecast, enrichment, reference data integration, etc
+1. Importing source models from semi structure document datasets
+2. Flatten semi structure model
+3. Remove duplicate data from sources data
+4. Data profiling on the raw data
+5. Apply data contract for data quality i.e selection, typecast, enrichment, reference data integration, etc
 
    5a. Good data will move to refined model
 
    5b. Bad data will move to refined error model
-5. Data profiling on refined data
-6. Apply patten to convert refined to data vault model automatically
-7. View data as data vault model
+6. Data profiling on refined data
+7. Apply patten to convert refined to data vault model automatically
+8. View data as data vault model
 
 ### Technical setup
 
-1. CSV as a source for document data
+1. Json as a source for document data
 2. Kafka for event streaming to ingest and process data in real-time
 3. Postgres as a target for data vault storage
 4. Kolle for metabase repository and automation
 
 ### Show me
+
+[![Introduction](https://img.youtube.com/vi/rBooWhPqZX8/0.jpg)](https://youtu.be/rBooWhPqZX8)
