@@ -2,9 +2,9 @@
 
 As a part of this tutorial, we will see how to transfer the XML data to the knowledge graph model using Kolle without writing any single line of code.
 
-Domain: Insurance claim
+Domain: Microsoft sample books.xml
 
-Source data: [Datasets](https://github.com/databricks-industry-solutions/dlt-insurance-claims/tree/main/data/samples/mongodb/claims.json)
+Source data: [Datasets](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/ms762271(v=vs.85))
 
 #### High level
 

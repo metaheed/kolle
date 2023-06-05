@@ -62,7 +62,7 @@ End to end data integration from semi structure mangodb dataset to different typ
 * [Data contract versioning](doc/data_contract_versioning.md)
 * [Data profiling before and after data contract](doc/data_profiling.md)
 * [Ingest and process XML data and download as knowledge graph or flatten model](doc/xml-knowledge-graph.md)
-* [Automation pipeline versioning](doc/pipeline_version.md)
+* [Data pipeline versioning](doc/pipeline_version.md)
 
 # Quick start
 

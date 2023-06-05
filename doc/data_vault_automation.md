@@ -32,7 +32,7 @@ Relational model -> data contract -> Data vault model
 1. Json as a source for document data
 2. Kafka for event streaming to ingest and process data in real-time
 3. Postgres as a target for data vault storage
-4. Kolle for metabase repository and automation
+4. Kolle for metadata repository and automation
 
 ### Show me
 
