@@ -18,8 +18,8 @@ Data consumer needs additional data or calculated data from the producer but on 
 
 ### Processing step
 
-1. Importing source model from CSV file.
-2. Remove duplicate from source file
+1. Importing source model from JSON file.
+2. Apply flatten on source model to build raw model
 3. Create data contract version 1 for consumer data version 1
 4. Deploy data contract to platfrom
 5. Create data contract version 2 for consumer data version 2
@@ -28,11 +28,12 @@ Data consumer needs additional data or calculated data from the producer but on 
 
 ### Technical setup
 
-1. CSV file as data producer
+1. JSON file as data producer
 2. Kafka for event streaming to ingest and process data in real-time
 3. Kafka topic for consumers 1 and 2
 4. Kolle for metadata repository and automation
 
 ### Show me
 
-Coming soon...
+
+[![Introduction](https://img.youtube.com/vi/-ZGYN1tjuz4/0.jpg)](https://youtu.be/-ZGYN1tjuz4)
