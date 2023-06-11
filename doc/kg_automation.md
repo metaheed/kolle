@@ -22,10 +22,8 @@ Consumer: Knowledge graph model
 2. Remove duplicate data from source data
 3. Data profiling on the source data
 4. Apply data contract for data quality i.e selection, typecast, enrichment, reference data integration, etc
-
-   5a. Good data will move to refined model
-
-   5b. Bad data will move to refined error model
+   4a. Good data will move to refined model
+   4b. Bad data will move to refined error model
 5. Data profiling on refined data
 6. Convert to the RDF model from refined model as the target model
 7. Visualize data as knowledge graph
@@ -40,3 +38,4 @@ Consumer: Knowledge graph model
 ### Show me
 
 [![Introduction](https://img.youtube.com/vi/VEIWuMkZzaI/0.jpg)](https://youtu.be/VEIWuMkZzaI)
+
