@@ -4,7 +4,7 @@ Zero/Low code based business model representation automation
 
 # About Kolle
 
-Kolle is for working on data models, data-contract, data quality, data profiling, and data linage instead of technical tooling.
+Kolle is for working on data models, data-contract, data quality, data profiling, and data linage instead of technical tooling or platform.
 
 Today for business continuation, the business model needs to represent in many ways - normalized form for transactional data, a time-series database for process mining, a knowledge graph for semantics search or link data, a data-vault or snowflake model for data warehouse, a streaming model for the real-time event and columnar storage for machine learning. To move or prepare the data and model for multiple types of consumption is not only expensive but has a lot of repetition costs for the team and technology setup. Automation needs to be in place to reduce repetition costs.
 
@@ -23,18 +23,20 @@ End to end data integration from semi structure mangodb dataset to different typ
 # Features
 
 - Metadata harvesting from any source format
-- Share model within an organization or internet
+- Share data model within an organization or internet
 - Data(XML, JSON, CSV, ZIP) to model generator
 - Model to model transformation
 - Data quality based on micro type
+- Data contract UI with data grid
+- Data profiling
+- Data linage automatically
 - Custom micro type
-- Captuaring model change automatically
+- Captuaring source model change automatically
 - Real time code generation and visualization
 - Real time collaboration within multiple user
 - Incremental deployment
 - Batch cleanup (only flow or only storage or both flow and storage)
 - Data view for xml, json, csv
-- Data profiling
 - Download data in many different format like xml, rdf, json, and csv
 - Integration with any (cloud, on-promise) confluent platform
 - Many pattern - dead latter queue, distinct, data-vault model converter and more
@@ -61,8 +63,13 @@ End to end data integration from semi structure mangodb dataset to different typ
 * [Convert document model to data vault model](doc/data_vault_automation.md)
 * [Data contract versioning](doc/data_contract_versioning.md)
 * [Data profiling before and after data contract](doc/data_profiling.md)
-* [Ingest and process XML data and download as knowledge graph or flatten model](doc/xml-knowledge-graph.md)
+* [Ingest and process document data and download as knowledge graph or flatten data](doc/xml-knowledge-graph.md)
 * [Data pipeline versioning](doc/pipeline_version.md)
+* [Meta model visualization](doc/meta_model_visualization.md)
+* [Data lineage](doc/data_lineage.md)
+* [Data quality and Micro type](doc/micro_type.md)
+
+
 
 # Quick start
 
