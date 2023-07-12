@@ -65,14 +65,14 @@ End to end example
 * [Convert document model to data vault model](doc/data_vault_automation.md)
 * [Ingest and process document data and download as knowledge graph or flatten data](doc/xml-knowledge-graph.md)
 
-Data pipeline
+Separation of concerns
 
 * [Meta model visualization](doc/meta_model_visualization.md)
 * [Data profiling before and after data contract](doc/data_profiling.md)
 * [Data lineage](doc/data_lineage.md)
 * [Data quality and Micro type](doc/data_quality.md)
 
-System
+Collaboration & Version
 
 * [Data contract versioning](doc/data_contract_versioning.md)
 * [Data pipeline versioning](doc/pipeline_version.md)
@@ -99,4 +99,3 @@ $ docker run -it -p 3000:3000 --rm ghcr.io/metaheed/kolle
 Copyright © 2022-2023 Abdullah Mamun
 
 Distributed under the Apache License. See LICENSE.
-

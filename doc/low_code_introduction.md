@@ -344,7 +344,6 @@ person latest only store latest value from producer person. **id** is primary ke
 
 ##### Data quality rule
 
-Data quality rule is used to copy data from source to target model. 
 
 ```
 Subject        Property        Object 
