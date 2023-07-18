@@ -1,6 +1,6 @@
-### Data pipeline versioning
+### Data pipeline versioning using blue green deployment
 
-As a part of this tutorial, we will see how to build data pipeline versioning using Kolle without writing any single line of code.
+As a part of this tutorial, we will see how to build data pipeline versioning using Kolle without writing any single line of code. Blue-green deployment will be used for data pipeline versioning. Blue green deployment is fast, easy to deploy and rollback.
 
 Domain: Insurance policy
 
@@ -8,24 +8,26 @@ Source data: [Datasets](https://github.com/databricks-industry-solutions/dlt-ins
 
 ### High level
 
-Data_Producer  -> Data_Contract -> Data_Consumer
-
-Create new version of whole process 
+Version_0  -> Version_1 -> version_2
 
 ### Processing step
 
-1. Importing source model from CSV file.
-2. Remove duplicate from source file
-3. Create data contract version 1 for consumer data version 1
-4. Deploy data contract to platfrom
-5. Create new name space and deploy it platform
+1. Build data pipeline from semi structure data
+2. Deploy pipeline as version_0
+3. Copy from current version_0 to new version_1
+4. Deploy new version_1 and switch triffic to version_1
+5. Remove version_0 from system
+6. Create new version_2 from current version_1
+7. Rollback version_2 and continue with version_1
 
 ### Technical setup
 
-1. CSV file as data producer
+1. Json file as data producer
 2. Kafka for event streaming to ingest and process data in real-time
 3. Kolle for metadata repository and automation
 
 ### Show me
 
-Coming soon...
+[![Introduction](https://img.youtube.com/vi/OjXt6QHX-r4/0.jpg)](https://youtu.be/OjXt6QHX-r4)
+
+
