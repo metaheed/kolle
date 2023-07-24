@@ -1,6 +1,12 @@
 ## Low code introduction
 
-Kolle low code is an RDF triple-based declarative mapping language. All mapping has a subject, property, and object.
+Kolle low code is an RDF triple-based declarative language.
+
+The main purpose of defining Kolle low-code is to easily convert to no-code and understandable to machine and human. On the other hand, RDF is easy to represent and transform. The input and output of the Kolle compiler is RDF triple.
+
+Each line of Kolle input is triple and output is also triple. The final emitter of Kolle can be SQL statement, data-linage UI, model visualization, Avro schema, etc.
+
+Triple has a subject, property, and object.
 
 Subject:  It is the name of the model or type. It will always symbol and not nil
 
@@ -247,7 +253,7 @@ Convert document model to flatten model
 Subject                Property                  Object
 -----------------------------------------------------------------------------
 person_full             nil                     (metadata {:person {:f_name "" :l_name "" dob ""}
-                                                           :address [{:post_code 23454 :street "" :city ""}]} ) ```;                   
+                                                           :address [{:post_code 23454 :street "" :city ""}]} ) ```;                 
 _                       _                       (flatten person_full);```
 ```
 
@@ -261,7 +267,7 @@ Apply is used for batch operation when the consumer model needs to remove duplic
 Subject                Property                  Object
 -----------------------------------------------------------------------------
 person_full             nil                     (metadata {:person {:f_name "" :l_name "" dob ""}
-                                                           :address [{:post_code 23454 :street "" :city ""}]} ) ```;                   
+                                                           :address [{:post_code 23454 :street "" :city ""}]} ) ```;                 
 _                       _                       (flatten person_full);
 _                       _                       (apply distinct _raw)```
 ```
@@ -274,7 +280,7 @@ Get returns one model from the document or hierarchical model.
 Subject                Property                  Object
 -----------------------------------------------------------------------------
 person_full             nil                     (metadata {:person {:f_name "" :l_name "" dob ""}
-                                                           :address [{:post_code 23454 :street "" :city ""}]} ) ```;                   
+                                                           :address [{:post_code 23454 :street "" :city ""}]} ) ```;                 
 person_raw              nil                     (get person_full person);
 address_raw             nil                     (get person_full address)```
 ```
@@ -286,7 +292,7 @@ Change attribute value from producer model to consumer model.
 ```
 Subject                Property                  Object
 -----------------------------------------------------------------------------
-person                  nil                     (metadata {:f_name "" :l_name "" gender ""}} )                    
+person                  nil                     (metadata {:f_name "" :l_name "" gender ""}} )                  
 person_refined          first_name              person/f_name
 person_refined          last_name               person/l_name
 person_refind           gender                  (replace-value person/gender {"m" "male" "f" "female"} "na")
@@ -299,7 +305,7 @@ Accessing array element from producer model.
 ```
 Subject                Property                  Object
 -----------------------------------------------------------------------------
-person                  nil                     (metadata {:f_name "" :l_name "" gender "" mobile_no ["0176-564"]}} )                  
+person                  nil                     (metadata {:f_name "" :l_name "" gender "" mobile_no ["0176-564"]}} )                
 person_refined          first_name              person/f_name
 person_refined          last_name               person/l_name
 person_refined           mobile_no              (index-of person/mobile_no 1)
@@ -344,7 +350,6 @@ person latest only store latest value from producer person. **id** is primary ke
 
 ##### Data quality rule
 
-
 ```
 Subject        Property        Object 
 -------------------------------------
@@ -352,7 +357,7 @@ party_raw      id              nil
 party_raw      f_name          nil
 party_raw      l_name          nil
 party_raw      age             nil
-                      
+                    
 party_refined  nil            (select party_raw/*)
 party_refined  age            party_raw/age
 party_refined  nil            (assoc-dv-attr id party_raw/id)
@@ -362,5 +367,4 @@ party_refined  nil            (where+ (!=null party_raw/f_name party_raw/l_name)
 party_refined  nil            (where+ (< 4 party_raw/l_name))
 ```
 
-where+ is used with different attribute to apply different data quality rule. 
-
+where+ is used with different attribute to apply different data quality rule.
