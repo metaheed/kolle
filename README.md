@@ -50,7 +50,7 @@ End to end data integration from semi structure mangodb dataset to different typ
 * **Data contract**: Explicit task between producer and consumer.
 * **Refined model**: Output model of data contract. It is a type-based model. All attributes must have the proper type based on data contract consumer specifications. Permission based on consumer specification.
 * **Target model**: Target system model, only technical transformation will be happened from refined to target model i.e graph, data-vault, etc. The target model can be optional if it is the same as the refined model.
-* **Microtype**: It is domain type - like email, claim_amount, customer_name, etc. Microtype will be driven from core type systems like string, int, float, etc.
+* **Logicaltype/Tinytype/Microtype**: It is domain type - like email, claim_amount, customer_name, etc. Microtype will be driven from core type systems like string, int, float, etc.
 * **Macro**: Model to model transformation. It is a plug-in to the system and it removes repetition tasks.
 * **System config**: It contains different runtime configurations for the platform like partition, replication, window time, runtime service url, etc.
 * **Metadata repo**: Main repo to contain user, metadata, system config, micro type or everything. It is unique with in the whole system. Every user can have multiple repositories.
@@ -65,12 +65,12 @@ End to end example
 * [Convert document model to data vault model](doc/data_vault_automation.md)
 * [Ingest and process document data and download as knowledge graph or flatten data](doc/xml-knowledge-graph.md)
 
-Separation of concerns
+Specific example 
 
 * [Meta model visualization](doc/meta_model_visualization.md)
 * [Data profiling before and after data contract](doc/data_profiling.md)
 * [Data lineage](doc/data_lineage.md)
-* [Data quality and Micro type](doc/data_quality.md)
+* [Data contract and Logical type](doc/data_quality.md)
 
 Collaboration & Version
 
