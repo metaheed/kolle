@@ -45,7 +45,7 @@ End to end data integration from semi structure mangodb dataset to different typ
 
 ![Alt text](doc/images/kolle_blueprint.png?raw=true "Title")
 
-* **Source model**: One to one copy from any source system, it can be any format like - csv, xml, json etc.Target system model, only technical transformation will be happened from refined to target model i.e graph, data-vault, etc. The target model can be optional if it is the same as the refined model. It is private model, no one should access this model and source system is the owner of this model
+* **Source model**: One to one copy from any source system, it can be any format like - csv, xml, json etc. Consumer should not access this model and source system is the owner of this model
 * **Raw model**: Input model for a data contract. Only technical transformation will happen from the source model to the raw model conversation i.e flatten, distinct, etc. The raw model can be optional if it is the same as the source model. Source and raw model values will be the same. It is also private model same as source model. Raw model should be access only from data contract.
 * **Data contract**: Explicit task between producer and consumer.
 * **Refined model**: Output model of data contract. It is a type-based model. All attributes must have the proper type based on data contract consumer specifications. Permission based on consumer specification.
@@ -57,6 +57,13 @@ End to end data integration from semi structure mangodb dataset to different typ
 * **User**: Users can be either owners or have read-only permission to each repository. The owner can set different types of permission for the repo.
 * **Builder**: Glue different concepts that can be changed independently to create execution code for the platform.
 
+
+#### Ownership and security
+
+Security: Source, raw and refined models are private for consumer. Consumer should access data only from consumer model or target model
+
+Ownership: Producers are the owner of source model and Consumer are the owner of target model. 
+
 # Automation in action
 
 End to end example
@@ -65,7 +72,7 @@ End to end example
 * [Convert document model to data vault model](doc/data_vault_automation.md)
 * [Ingest and process document data and download as knowledge graph or flatten data](doc/xml-knowledge-graph.md)
 
-Specific example 
+Specific example
 
 * [Meta model visualization](doc/meta_model_visualization.md)
 * [Data profiling before and after data contract](doc/data_profiling.md)
